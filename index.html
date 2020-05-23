@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./dist/Accordion.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .acc-item {
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+
+        .acc-header {
+            padding: 0.5rem;
+            background: #eee;
+            position: relative;
+        }
+
+        .acc-item .acc-header:after {
+            transition: all ease-in-out 100ms;
+            top: calc(50% - 2.5px);
+            transform: rotate(135deg) translateX(-50%);
+            right: 1rem;
+            position: absolute;
+            display: inline-block;
+            content: "";
+            width: 5px;
+            height: 5px;
+            border-right: 1px solid black;
+            border-top: 1px solid black;
+        }
+
+        .acc-item.expanded .acc-header {
+            background: rgb(202, 238, 160);
+        }
+
+        .acc-item.expanded .acc-header:after {
+            transform: rotate(-45deg);
+        }
+
+        .acc-content-inner {
+            padding: 0.5rem;
+            background: #7f7fa3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <h1>Accordion</h1>
+        <p>
+            <code>oneOpen = true; oneNeedsToBeActive = true; [data.target] set, animationTime = 100</code>
+        </p>
+        <div class="acc acc--externalContent">
+            <div class="acc-item">
+                <div class="acc-header">item1</div>
+                <div class="acc-content" style="display: none;">
+                    <div class="acc-content-inner">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
+                        neque
+                        reiciendis
+                        minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
+                    </div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header" data-target=".item-b">item1</div>
+            </div>
+        </div>
+        <div class="acc-content item-b" style="display: none;">
+            <div class="acc-content-inner">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
+                neque
+                reiciendis
+                minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
+            </div>
+        </div>
+        <script>
+            document.querySelectorAll(".acc--externalContent").forEach((item, index) => {
+                let acc = new Accordion({
+                    item: item,
+                    oneOpen: true,
+                    oneNeedsToBeActive: true,
+                    animationTime: 100,
+                    interact: function (options) {
+
+                    }
+                });
+            });
+        </script>
+        <p>
+            <code>oneOpen = true; oneNeedsToBeActive = false;</code>
+        </p>
+        <div class="acc acc--classic">
+            <div class="acc-item">
+                <div class="acc-header">item 0</div>
+                <div class="acc-content" style="display: none;">
+                    <div class="acc-content-inner">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
+                        neque
+                        reiciendis
+                        minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
+                    </div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header">item 1</div>
+                <div class="acc-content" style="display: none;">
+                    <div class="acc-content-inner">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
+                        neque
+                        reiciendis
+                        minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
+                    </div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header">item 2</div>
+                <div class="acc-content" style="display: none;">
+                    <div class="acc-content-inner">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
+                        neque
+                        reiciendis
+                        minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.querySelectorAll(".acc--classic").forEach((item, index) => {
+                let acc = new Accordion({
+                    item: item,
+                    oneOpen: true,
+                    animationTime: 200,
+                    oneNeedsToBeActive: false,
+                    interact: function (options) {
+                        console.log(options)
+                    }
+                });
+            });
+        </script>
+        <p>
+            <code>oneOpen = true; oneNeedsToBeActive = true;</code>
+        </p>
+        <div class="acc acc--oneOpenOneActive">
+            <div class="acc-item expanded">
+                <div class="acc-header">item 0</div>
+                <div class="acc-content" style="display: none;">
+                    <div class="acc-content-inner">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
+                        neque
+                        reiciendis
+                        minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
+                    </div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header">item 1</div>
+                <div class="acc-content" style="display: none;">
+                    <div class="acc-content-inner">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
+                        neque
+                        reiciendis
+                        minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
+                    </div>
+                </div>
+            </div>
+            <div class="acc-item">
+                <div class="acc-header">item 2</div>
+                <div class="acc-content" style="display: none;">
+                    <div class="acc-content-inner">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
+                        neque
+                        reiciendis
+                        minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.querySelectorAll(".acc--oneOpenOneActive").forEach((item, index) => {
+                let acc = new Accordion({
+                    item: item,
+                    oneOpen: true,
+                    oneNeedsToBeActive: true,
+                    interact: function (options) {
+                        console.log(options)
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+
+</html>
