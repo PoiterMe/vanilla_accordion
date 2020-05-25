@@ -25,6 +25,7 @@
             padding: 0.5rem;
             background: #eee;
             position: relative;
+            width: 100%;
         }
 
         .acc-item .acc-header:after {
@@ -60,39 +61,39 @@
     <div class="wrap">
         <h1>Accordion</h1>
         <p>
-            <code>oneOpen = true; oneNeedsToBeActive = true; [data.target] set, animationTime = 100</code>
+            <code>oneOpen = true; oneNeedsToBeActive = true; [data.target] set, animationTime = 400</code>
         </p>
         <div class="acc acc--externalContent">
             <div class="acc-item">
-                <div class="acc-header">item1</div>
-                <div class="acc-content" style="display: none;">
+                <button class="acc-header">item1</button>
+                <section class="acc-content" style="display: none;">
                     <div class="acc-content-inner">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
                         neque
                         reiciendis
                         minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
                     </div>
-                </div>
+                </section>
             </div>
             <div class="acc-item">
-                <div class="acc-header" data-target=".item-b">item1</div>
+                <button class="acc-header" data-target=".item-b">item1</button>
             </div>
         </div>
-        <div class="acc-content item-b" style="display: none;">
+        <section class="acc-content item-b" style="display: none;">
             <div class="acc-content-inner">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
                 neque
                 reiciendis
                 minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
             </div>
-        </div>
+        </section>
         <script>
             document.querySelectorAll(".acc--externalContent").forEach((item, index) => {
                 let acc = new Accordion({
                     item: item,
                     oneOpen: true,
                     oneNeedsToBeActive: true,
-                    animationTime: 100,
+                    animationTime: 400,
                     interact: function (options) {
 
                     }
@@ -104,37 +105,37 @@
         </p>
         <div class="acc acc--classic">
             <div class="acc-item">
-                <div class="acc-header">item 0</div>
-                <div class="acc-content" style="display: none;">
+                <button class="acc-header">item 0</button>
+                <section class="acc-content" style="display: none;">
                     <div class="acc-content-inner">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
                         neque
                         reiciendis
                         minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
                     </div>
-                </div>
+                </section>
             </div>
             <div class="acc-item">
-                <div class="acc-header">item 1</div>
-                <div class="acc-content" style="display: none;">
+                <button class="acc-header">item 1</button>
+                <section class="acc-content" style="display: none;">
                     <div class="acc-content-inner">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
                         neque
                         reiciendis
                         minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
                     </div>
-                </div>
+                </section>
             </div>
             <div class="acc-item">
-                <div class="acc-header">item 2</div>
-                <div class="acc-content" style="display: none;">
+                <button class="acc-header">item 2</button>
+                <section class="acc-content" style="display: none;">
                     <div class="acc-content-inner">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
                         neque
                         reiciendis
                         minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
                     </div>
-                </div>
+                </section>
             </div>
         </div>
         <script>
@@ -155,30 +156,30 @@
         </p>
         <div class="acc acc--oneOpenOneActive">
             <div class="acc-item expanded">
-                <div class="acc-header">item 0</div>
-                <div class="acc-content" style="display: none;">
+                <button class="acc-header">item 0</button>
+                <section class="acc-content" style="display: none;">
                     <div class="acc-content-inner">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
                         neque
                         reiciendis
                         minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
                     </div>
-                </div>
+                </section>
             </div>
             <div class="acc-item">
-                <div class="acc-header">item 1</div>
-                <div class="acc-content" style="display: none;">
+                <button class="acc-header">item 1</button>
+                <section class="acc-content" style="display: none;">
                     <div class="acc-content-inner">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
                         neque
                         reiciendis
                         minus quis ea quae cumque enim in, ex hic sint. Assumenda totam eaque harum esse?
                     </div>
-                </div>
+                </section>
             </div>
             <div class="acc-item">
-                <div class="acc-header">item 2</div>
-                <div class="acc-content" style="display: none;">
+                <button class="acc-header">item 2</button>
+                <section class="acc-content" style="display: none;">
                     <div class="acc-content-inner">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit nemo obcaecati possimus,
                         neque

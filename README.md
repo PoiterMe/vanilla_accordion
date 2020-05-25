@@ -1,22 +1,35 @@
 # vanilla_accordion
 Easy to use, customisable accordion, written in typescript.
 
+## Features
+
+- responsive 
+- no css needed 
+- very flexible in the structure of the html 
+- many options 
+- callback for interactions (open, close);
+- methods for toggling the accordion and overwritting options
+- can be easily transformed to work with all available build enviroments using the typescript compiler
+
+
 ---
-## Generate it for your enviroment
+## for your enviroment
 As mentioned above it is written in typescript, so just configure the typescript compiler to generate it for your individual needs.     
 In the example below i used the following options in tsconfig.json
 ``` json
 {
     "compilerOptions": {
-        "target": "ES5",
-        "sourceMap": true,
         "outDir": "dist",
-    }
+        "sourceMap": true
+    },
+    "include": [
+        "src/**/*"
+    ],
 }
 ``` 
 and run:   
 ```
-$ tsc src/Accordion.ts
+$ tsc
 ```
 
 ---
@@ -26,24 +39,27 @@ $ tsc src/Accordion.ts
 <div class="acc">
     <div class="acc-item">
          <!-- point to a remote content -->
-        <div class="acc-header" data-target=".item-a">elsewhere header</div>
+        <button class="acc-header" data-target=".item-a">elsewhere header</button>
     </div>
     <div class="acc-item">
-        <div class="acc-header">standard header</div>
-        <div class="acc-content">standard content</div> 
+        <button class="acc-header">standard header</button>
+        <section class="acc-content">standard content</section> 
     </div>
     <!--  item with className expanded is allready opened -->
     <div class="acc-item expanded">
-        <div class="acc-header">standard header</div>
-        <div class="acc-content">standard content</div> 
+        <button class="acc-header">standard header</button>
+        <section class="acc-content">standard content</section> 
     </div>
 </div>
-<div class="acc-content item-a">elsewhere content</div> 
+<section class="acc-content item-a">elsewhere content</section> 
  <!-- initialize -->
 <script src="./dist/Accordion.js"></script>
 
 <script>  
+
 let acc = new Accordion({
+
+    // defaults ::
 
     /* can be a selector, a single node or a nodelist */
     item: ".acc", // : string | NodeList | Element
@@ -61,11 +77,14 @@ let acc = new Accordion({
     /* selector for the header, click on it triggers functionality */
     header_selector: ".acc-header", // : string
 
-    /* selector for the content, can be overwritten with data-target on the header selector */
+    /* selector for the content, can be overwritten with targetDataAttribute on the header element */
     content_selector: ".acc-content", // : string
 
+    /* name of the data attribute for defining a content selector on the header element */
+    targetDataAttribute : "data-target", // : string
+
     /* time in ms for the css transition */
-    animationTime: 400, // : number
+    animationTime: 100, // : number
 
     /* fires each time you interact */
     interact: function (options) { 

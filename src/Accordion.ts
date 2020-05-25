@@ -4,6 +4,7 @@ interface Accordion_Configs {
     oneNeedsToBeActive?: boolean;
     child_selector?: string | null;
     header_selector?: string;
+    targetDataAttribute?: string;
     content_selector?: string;
     activeClass?: string;
     animationTime?: number;
@@ -35,7 +36,7 @@ if (typeof Object.assign != 'function') {
 class Accordion {
     private expandedClassName: string = "expanded";
     private attribute_index: string = "data-index";
-    private attribute_target: string = "data-target";
+    private error_notValid: string =  " is either not valid or cannot be found";
     private timer: number | null = null;
     options: Accordion_Configs;
     nodeArray: any[];
@@ -47,14 +48,19 @@ class Accordion {
             oneNeedsToBeActive: false,
             child_selector: null,
             header_selector: ".acc-header",
+            targetDataAttribute : "data-target",
             content_selector: ".acc-content",
             activeClass: "active",
-            animationTime: 400,
+            animationTime: 100,
             interact: function () {
             }
         }
         this.options = Object.assign(defaults, options)
-        this.initialize();
+        try {
+            this.initialize();
+        } catch (e) {
+            console.error(e);
+        }
     }
     private isElement(element: string | NodeList | Element) {
         return element instanceof Element || element instanceof HTMLDocument;
@@ -65,11 +71,12 @@ class Accordion {
     private nodeListToArray(nodeList: NodeList | HTMLCollection | any) {
         return Array.prototype.slice.call(nodeList);
     }
-    private contentItem(accordionItem: HTMLElement, header: HTMLElement): HTMLElement {
+    private contentItem(accordionItem: HTMLElement, header: HTMLElement | null): HTMLElement {
+        if (!header) return null;
         let content: HTMLElement = accordionItem.querySelector(this.options.content_selector),
-            headerTarget = header.getAttribute(this.attribute_target);
+            headerTarget = header.getAttribute(this.options.targetDataAttribute);
         if (headerTarget) content = document.querySelector(headerTarget)
-        return content;
+        return content || null;
     }
     private __closeElement(accordionItem) {
         let header: HTMLElement = accordionItem.querySelector(this.options.header_selector);
@@ -143,8 +150,10 @@ class Accordion {
             let children = (this.options.child_selector) ? this.nodeListToArray(node.querySelectorAll(this.options.child_selector)) : this.nodeListToArray(node.children);
             children.forEach((accordionItem, accordionIndex) => {
                 accordionItem.setAttribute(this.attribute_index, accordionIndex);
-                let header: HTMLElement = accordionItem.querySelector(this.options.header_selector),
+                let header: HTMLElement | null = accordionItem.querySelector(this.options.header_selector) || null,
                     content: HTMLElement = this.contentItem(accordionItem, header);
+                if (!header) throw "header_selector" + this.error_notValid;
+                if (!content) throw "content_selector" + this.error_notValid;
                 if (content && content.style.display === "none") content.style.display = "";
                 if (header && content) {
                     content.style.transition = `max-height ${this.options.animationTime}ms ease-out`;
@@ -164,4 +173,3 @@ class Accordion {
         this.options.interact = callback
     }
 }
-
